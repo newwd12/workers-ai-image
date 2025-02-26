@@ -1,13 +1,14 @@
 #:schema node_modules/wrangler/config-schema.json
-name = "workers-ai-image-playground"
+name = "workers-ai-image"
 compatibility_date = "2024-09-25"
 compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
 
 [ai]
 binding = "AI"
 
 [[r2_buckets]]
-bucket_name = "ai-img-playground"
+bucket_name = "ai-img"
 binding = "BUCKET"
 
 [vars]

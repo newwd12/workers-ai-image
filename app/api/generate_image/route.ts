@@ -9,8 +9,7 @@ export const runtime = 'edge'
 export async function POST(request: NextRequest) {
   try {
     const context = getRequestContext()
-    //const {AI, BUCKET} = context.env
-    const {AI} = context.env
+    const {AI, BUCKET} = context.env
     let { prompt, model } = await request.json<{ prompt: string, model: string }>()
     if (!model) model = "@cf/black-forest-labs/flux-1-schnell"
 
@@ -21,8 +20,9 @@ export async function POST(request: NextRequest) {
     const binaryString = atob(response.image);
 
     // @ts-ignore
-    //const img = Uint8Array.from(binaryString, (m) => m.codePointAt(0));
-    //await BUCKET.put(`${promptKey}.jpeg`, img)
+    const img = Uint8Array.from(binaryString, (m) => m.codePointAt(0));
+    console.log("promptKey:", promptKey)
+    await BUCKET.put(`${promptKey}.jpeg`, img)
 
     return new Response(`data:image/jpeg;base64,${response.image}`, {
       headers: {

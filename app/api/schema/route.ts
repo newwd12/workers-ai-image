@@ -13,6 +13,8 @@ export async function GET(request: NextRequest) {
 
   const env = getRequestContext().env;
   const { CLOUDFLARE_ACCOUNT_ID: account_id, CLOUDFLARE_API_TOKEN } = env;
+  console.log("account id:", account_id)
+  console.log("api token:", CLOUDFLARE_API_TOKEN)
 
   if (!account_id) return new Response("Account ID not specified", { status: 400 });
   if (!CLOUDFLARE_API_TOKEN) return new Response("API token not specified", { status: 400 });
